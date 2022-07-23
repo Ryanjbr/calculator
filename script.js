@@ -22,14 +22,6 @@ const sum = function(array) {
   return sum;
 };
 
-const multiply = function(array) {
-  let product = 1;
-	for(let element of array) {
-    product = product * element;
-  }
-  return product;
-};
-
 const power = function(base, exponent) {
   let result = base;
 	for(let i = 1; i < exponent; i++) {
@@ -51,3 +43,18 @@ const factorial = function(x) {
     return result;
   };
 };
+
+const operate = function(operator, x, y) {
+    if (operator === '+') {
+        return(add(x, y))
+    }
+    else if (operator === '-') {
+        return(subtract(x, y))
+    }
+    else if (operator === '*') {
+        return(multiply(x, y))
+    }
+    else if (operator === '/') {
+        return(divide(x, y))
+    }
+}
