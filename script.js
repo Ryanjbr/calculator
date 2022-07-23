@@ -58,3 +58,17 @@ const operate = function(operator, x, y) {
         return(divide(x, y))
     }
 }
+
+function display(result) {
+    const display = document.querySelector('.display');
+    display.textContent = result;
+}
+
+const numbers = document.querySelectorAll('.number');
+for (let number of numbers) {
+    number.addEventListener('click', () => {
+        console.log(number.innerHTML)
+        display(number.innerHTML);
+    }) 
+}
+    
