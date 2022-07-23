@@ -1,0 +1,37 @@
+body {
+    width: 100vh;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 30vw 40vw 30vw;
+    grid-template-rows: 15vh 70vh 15vh;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 20% 80%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-color: grey;
+}
+
+.bottomContainer {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 100%;
+}
+
+.middle {
+    display: grid;
+    grid-template-columns: repeat(3, 33.33%);
+    grid-template-rows: repeat(4, 25%);
+}
+
+.rightSide {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(4, 25%);
+}
+
