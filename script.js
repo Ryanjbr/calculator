@@ -65,10 +65,19 @@ function display(result) {
 }
 
 const numbers = document.querySelectorAll('.number');
+let firstNumber = ""
+
 for (let number of numbers) {
     number.addEventListener('click', () => {
         console.log(number.innerHTML)
-        display(number.innerHTML);
+        firstNumber = firstNumber.concat(number.innerHTML)
+        display(firstNumber);
     }) 
 }
-    
+
+let clear = document.querySelector(".clear")
+
+clear.addEventListener("click", () => {
+    display(0);
+})
+
