@@ -65,15 +65,32 @@ function display(result) {
 }
 
 const numbers = document.querySelectorAll('.number');
-let firstNumber = ""
+let currentNumber = "";
+let prevValues = [];
+
+// variable can be "currentNumber"
+// use "prevValues" array
 
 for (let number of numbers) {
     number.addEventListener('click', () => {
-        console.log(number.innerHTML)
-        firstNumber = firstNumber.concat(number.innerHTML)
-        display(firstNumber);
-    }) 
+        currentNumber = currentNumber.concat(number.innerHTML)
+        display(currentNumber);
+    });
 }
+
+const operators = document.querySelectorAll('.operator')
+
+let currentOperator = '';
+
+// TODO: finish
+
+/* for(let operator of operators) {
+    operator.addEventListener('click', () => {
+        currentOperator = operator.innerHTML;
+        prevValues.push(currentNumber);
+        currentNumber = 0;
+    });
+} */
 
 let clear = document.querySelector(".clear")
 
