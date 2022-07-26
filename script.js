@@ -11,38 +11,31 @@ const multiply = function(x, y) {
 }
 
 const divide = function(x, y) {
+    if (+y === 0) {
+        alert("You have summoned the eldritch terrors. Repent.");
+        reset();
+        return;
+    }
     return +x / +y;
 }
 
-const sum = function(array) {
-  let sum = 0;
-	for(let element of array) {
-    sum += +element;
-  }
-  return sum;
-};
-
-const power = function(base, exponent) {
-  let result = base;
-	for(let i = 1; i < exponent; i++) {
-    result = result * base;
-  }
-  return result;
-};
-
-const factorial = function(x) {
-	if (x === 0) {
-    return 1;
-  }
-  else {
-    let result = 1;
-    for (let i = x; i > 0; i--) {
-      result = result * i;
-      console.log(result)
+function display(result) {
+    if (+result !== Math.floor(+result)) {
+        result = Math.round(+result * 100000000000) / 100000000000;
     }
-    return result;
-  };
-};
+    if (Number.isFinite(+result) === false) {
+        result = 0;
+    }
+    const display = document.querySelector('.display');
+    display.textContent = result;
+}
+
+function reset() {
+    display(0);
+    currentResult = 0;
+    currentNumber = 0;
+    currentOperator = '';
+}
 
 const operate = function(operator, x, y) {
     if (operator === '+') {
@@ -70,10 +63,7 @@ function calculate() {
     };
 }
 
-function display(result) {
-    const display = document.querySelector('.display');
-    display.textContent = result;
-}
+
 
 const numbers = document.querySelectorAll('.number');
 let currentNumber = "";
@@ -102,8 +92,13 @@ for(let operator of operators) {
 let equals = document.querySelector('.equals')
 
 equals.addEventListener('click', () => {
-    display(calculate());
-    currentNumber = '';
+    if (calculate() === '') {
+        display(0);
+    }
+    else {
+        display(calculate());
+    }
+    currentNumber = 0;
     currentOperator = '';
     currentResult = 0;
 });
@@ -111,9 +106,6 @@ equals.addEventListener('click', () => {
 let clear = document.querySelector(".clear")
 
 clear.addEventListener("click", () => {
-    display(0);
-    currentResult = 0;
-    currentNumber = '';
-    currentOperator = '';
+    reset()
 });
 
