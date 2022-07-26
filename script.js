@@ -1,23 +1,23 @@
 const add = function(x, y) {
-	return x + y;
+	return +x + +y;
 };
 
 const subtract = function(x, y) {
-	return x - y;
+	return +x - +y;
 };
 
 const multiply = function(x, y) {
-    return x * y;
+    return +x * +y;
 }
 
 const divide = function(x, y) {
-    return x / y;
+    return +x / +y;
 }
 
 const sum = function(array) {
   let sum = 0;
 	for(let element of array) {
-    sum += element;
+    sum += +element;
   }
   return sum;
 };
@@ -59,6 +59,17 @@ const operate = function(operator, x, y) {
     }
 }
 
+function calculate() {
+    if (currentOperator === '') {
+        currentResult = currentNumber;
+        return currentNumber;
+    }
+    else {
+        currentResult = operate(currentOperator, currentResult, currentNumber)
+        return currentResult;
+    };
+}
+
 function display(result) {
     const display = document.querySelector('.display');
     display.textContent = result;
@@ -66,10 +77,7 @@ function display(result) {
 
 const numbers = document.querySelectorAll('.number');
 let currentNumber = "";
-let prevValues = [];
 
-// variable can be "currentNumber"
-// use "prevValues" array
 
 for (let number of numbers) {
     number.addEventListener('click', () => {
@@ -79,22 +87,33 @@ for (let number of numbers) {
 }
 
 const operators = document.querySelectorAll('.operator')
-
+let currentResult = 0;
 let currentOperator = '';
 
-// TODO: finish
-
-/* for(let operator of operators) {
+for(let operator of operators) {
     operator.addEventListener('click', () => {
+        console.log(currentOperator)
+        display(calculate());
         currentOperator = operator.innerHTML;
-        prevValues.push(currentNumber);
-        currentNumber = 0;
+        currentNumber = '';
     });
-} */
+}
+
+let equals = document.querySelector('.equals')
+
+equals.addEventListener('click', () => {
+    display(calculate());
+    currentNumber = '';
+    currentOperator = '';
+    currentResult = 0;
+});
 
 let clear = document.querySelector(".clear")
 
 clear.addEventListener("click", () => {
     display(0);
-})
+    currentResult = 0;
+    currentNumber = '';
+    currentOperator = '';
+});
 
