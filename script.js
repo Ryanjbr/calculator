@@ -14,7 +14,7 @@ const divide = function(x, y) {
     if (+y === 0) {
         alert("You have summoned the eldritch terrors. Repent.");
         reset();
-        return;
+        return '0';
     }
     return +x / +y;
 }
@@ -31,9 +31,9 @@ function display(result) {
 }
 
 function reset() {
-    display(0);
-    currentResult = 0;
-    currentNumber = 0;
+    display('0');
+    currentResult = '0';
+    currentNumber = '';
     currentOperator = '';
 }
 
@@ -55,10 +55,11 @@ const operate = function(operator, x, y) {
 function calculate() {
     if (currentOperator === '') {
         currentResult = currentNumber;
-        return currentNumber;
+        return currentResult;
     }
     else {
         currentResult = operate(currentOperator, currentResult, currentNumber)
+        console.log(currentOperator, currentResult, currentNumber)
         return currentResult;
     };
 }
@@ -66,15 +67,48 @@ function calculate() {
 
 
 const numbers = document.querySelectorAll('.number');
-let currentNumber = "";
+let currentNumber = '';
 
 
 for (let number of numbers) {
     number.addEventListener('click', () => {
+        if (currentNumber === currentResult) {
+            currentNumber = ''
+        }
         currentNumber = currentNumber.concat(number.innerHTML)
         display(currentNumber);
     });
+    window.addEventListener('keydown', (e) => {
+        if (e['key'] === number.innerHTML) {
+            if (currentNumber === currentResult) {
+                currentNumber = ''
+            }
+            currentNumber = currentNumber.concat(number.innerHTML)
+            display(currentNumber);
+        }
+    }); 
 }
+
+const backspace = document.querySelector('.backspace')
+
+backspace.addEventListener('click', () => {
+    currentNumber = currentNumber.slice(0, -1);
+    display(currentNumber);
+});
+window.addEventListener('keydown', (e) => {
+    if (e['key'] === 'Backspace') {
+        currentNumber = currentNumber.slice(0, -1);
+        display(currentNumber);
+    }
+}); 
+
+const decimal = document.querySelector('.decimal');
+decimal.addEventListener('click', () => {
+    if (currentNumber.includes('.') === false) {
+        currentNumber = currentNumber.concat('.')
+        display(currentNumber)
+    }
+})
 
 const operators = document.querySelectorAll('.operator')
 let currentResult = 0;
@@ -87,21 +121,34 @@ for(let operator of operators) {
         currentOperator = operator.innerHTML;
         currentNumber = '';
     });
+    window.addEventListener('keydown', (e) => {
+        if (e['key'] === operator.innerHTML) {
+            display(calculate());
+            currentOperator = operator.innerHTML;
+            currentNumber = '';
+        }
+    }); 
 }
 
 let equals = document.querySelector('.equals')
 
 equals.addEventListener('click', () => {
-    if (calculate() === '') {
-        display(0);
-    }
-    else {
+    if (currentNumber !== currentResult) {
         display(calculate());
-    }
-    currentNumber = 0;
-    currentOperator = '';
-    currentResult = 0;
+        currentNumber = currentResult;
+        currentOperator = '';
+    };
 });
+
+window.addEventListener('keydown', (e) => {
+    if (e['key'] === '=' || e['key'] === 'Enter') {
+        if (currentNumber !== currentResult) {
+            display(calculate());
+            currentNumber = currentResult;
+            currentOperator = '';
+        };
+    }
+}); 
 
 let clear = document.querySelector(".clear")
 
@@ -109,3 +156,6 @@ clear.addEventListener("click", () => {
     reset()
 });
 
+window.addEventListener('keydown', (e) => {
+    console.log(e)
+}); 
