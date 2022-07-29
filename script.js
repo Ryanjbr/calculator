@@ -75,16 +75,20 @@ for (let number of numbers) {
         if (currentNumber === currentResult) {
             currentNumber = ''
         }
-        currentNumber = currentNumber.concat(number.innerHTML)
-        display(currentNumber);
+        if (currentNumber.length < 10) {
+            currentNumber = currentNumber.concat(number.innerHTML)
+            display(currentNumber);
+        }
     });
     window.addEventListener('keydown', (e) => {
         if (e['key'] === number.innerHTML) {
             if (currentNumber === currentResult) {
                 currentNumber = ''
             }
-            currentNumber = currentNumber.concat(number.innerHTML)
-            display(currentNumber);
+            if (currentNumber.length < 10) {
+                currentNumber = currentNumber.concat(number.innerHTML)
+                display(currentNumber);
+            }
         }
     }); 
 }
@@ -94,6 +98,7 @@ const backspace = document.querySelector('.backspace')
 backspace.addEventListener('click', () => {
     currentNumber = currentNumber.slice(0, -1);
     display(currentNumber);
+    display('0');
 });
 window.addEventListener('keydown', (e) => {
     if (e['key'] === 'Backspace') {
@@ -105,8 +110,10 @@ window.addEventListener('keydown', (e) => {
 const decimal = document.querySelector('.decimal');
 decimal.addEventListener('click', () => {
     if (currentNumber.includes('.') === false) {
-        currentNumber = currentNumber.concat('.')
-        display(currentNumber)
+        if (currentNumber.length < 10) {
+            currentNumber = currentNumber.concat('.')
+            display(currentNumber)
+        }
     }
 })
 
@@ -117,7 +124,7 @@ let currentOperator = '';
 for(let operator of operators) {
     operator.addEventListener('click', () => {
         console.log(currentOperator)
-        display(calculate());
+        display(calculate().toString().slice(0, 10));
         currentOperator = operator.innerHTML;
         currentNumber = '';
     });
@@ -156,6 +163,3 @@ clear.addEventListener("click", () => {
     reset()
 });
 
-window.addEventListener('keydown', (e) => {
-    console.log(e)
-}); 

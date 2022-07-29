@@ -2,19 +2,38 @@ body {
     width: 100vh;
     height: 100vh;
     display: grid;
-    grid-template-columns: 30vw 40vw 30vw;
+    grid-template-columns: 35vw 30vw 35vw;
     grid-template-rows: 15vh 70vh 15vh;
+    color: white;
+
 }
 
 #container {
     display: grid;
+
     grid-template-columns: 100%;
     grid-template-rows: 20% 80%;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-color: grey;
+    padding: 20px;
+    background-color: #2b271c;
+}
+
+.display {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    background-color: #b6beac;
+    font-family: 'Quantico', 'Sans serif';
+    font-size: 40px;
+    text-align: right;
+    padding: 15px;
+    margin-top: 5px;
+    height: 30%;
+    color: black;
+    border-radius: 5px;
 }
 
 .bottomContainer {
@@ -33,5 +52,37 @@ body {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: repeat(4, 25%);
+}
+
+.leftSide {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(2, 50%);
+}
+
+.number, .operator, .equals, .decimal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.number, .decimal {
+    background-color: #858582;
+    border-radius: 5px;
+}
+
+.clear, .backspace {
+    text-align: center;
+    padding-top: 10px;
+    background-color: #ba2e26;
+    margin: 5px;
+    border-radius: 5px;
+    
+}
+
+.operator, .equals {
+    background-color: #53534e;
 }
 
